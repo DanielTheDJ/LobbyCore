@@ -1,2 +1,2 @@
-# LobbyCore
-The core for the lobby.
+
+The core for the McWars lobby.
