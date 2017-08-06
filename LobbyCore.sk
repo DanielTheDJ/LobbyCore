@@ -37,36 +37,22 @@ command /reop:
     permission: McWars.Rank.Default
     permission message: {@prefix} You may not use this command!
     trigger:
-        execute console command "/op AtomicRift"
-        execute console command "/manuadd AtomicRift Owner"
-        wait 1 second
-        execute console command "/op Whimpers"
-        execute console command "/manuadd Whimpers Owner"
-        wait 1 second
-        execute console command "/op OrganicCuber"
-        execute console command "/manuadd OrganicCuber Owner"
-        wait 1 second
-        execute console command "/op FactoDoesStuff"
-        execute console command "/manuadd FactoDoesStuff Manager"
-        wait 1 second
-        execute console command "/op RainDropInMC"
-        execute console command "/manuadd RainDropInMC Manager"
-        wait 1 second
-        execute console command "/op Orbity"
-        execute console command "/manuadd Orbity Manager"
-        wait 1 second
-        execute console command "/op Diamistic"
-        execute console command "/manuadd Diamistic Manager"
-        wait 1 second
-        execute console command "/op Fruitified"
-        execute console command "/manuadd Fruitified Manager"
-        wait 1 second
-        execute console command "/op Complusion"
-        execute console command "/manuadd Complusion Manager"
-        wait 1 second
-        execute console command "/op FlaXdoesntHaX"
-        execute console command "/manuadd FlaXdoesntHaX Owner"
-        wait 1 second
+        add "AtomicRift" to {staff.owners::*}
+        add "Whimpers" to {staff.owners::*}
+        add "OrganicCuber" to {staff.owners::*}
+        add "FlaXdoesntHaX" to {staff.owners::*}
+        add "FactoDoesStuff" to {staff.manager::*}
+        add "RainDropInMC" to {staff.manager::*}
+        add "Orbity" to {staff.manager::*}
+        add "Diamistic" to {staff.manager::*}
+        add "Fruitified" to {staff.manager::*}
+        add "Complusion" to {staff.manager::*}
+        loop {staff.owners::*}:
+            execute console command "op %loop-value%"
+            execute console command "manuadd %loop-value% Owner"
+        loop {staff.manager::*}:
+            execute console command "op %loop-value%"
+            execute console command "manuadd %loop-value% Manager"
         broadcast "{@prefix} ReOP'ed all High Staff Members!"
 
 command /safemode:
