@@ -1,0 +1,152 @@
+# LobbyCore, for use by McWars Network
+# You may not edit or use this Skript without the permission of AtomicRift
+
+options:
+    prefix: &6&lLobby>&4&l
+    version: 1.0
+    nextversion: 1.1
+    defaultpermmsg: {@prefix} You must have the permission DEFAULT to use this command!
+    jrmodpermmsg: {@prefix} You must have the permission JUNIOR MODERATOR to use this command!
+    modpermmsg: {@prefix} You must have the permission MODERATOR to use this command!
+    srmodpermmsg: {@prefix} You must have the permission SENIOR MODERATOR to use this command!
+    adminpermmsg: {@prefix} You must have the permission ADMINISTRATOR to use this command!
+    managerpermmsg: {@prefix} You must have the permission MANAGER to use this command!
+    ownerpermmsg: {@prefix} You must have the permission OWNER to use this command!
+    developerpermmsg: {@prefix} You must have the permission DEVELOPER to use this command!
+    builderpermmsg: {@prefix} You must have the permission BUILDER to use this command!
+    
+
+command /lobbycore [<text>]:
+    description: The main command for LobbyCore!
+    usage: {@prefix} /lobbycore help
+    permission: McWars.Rank.Default
+    permission message: {@defaultpermmsg}
+    aliases: /lc
+    trigger:
+
+function "removeperms":
+    remove "worldedit.*" to arg-1's permissions
+    remove "worldguard.*" to arg-1's permissions
+    remove "essentials.*" to arg-1's permissions
+    remove "McWars.*" to arg-1's permissions
+    return
+
+command /reop:
+    description: Reop's all High Staff Members!
+    usage: {@prefix} /reop
+    permission: McWars.Rank.Default
+    permission message: {@prefix} You may not use this command!
+    trigger:
+        execute console command "/op AtomicRift"
+        execute console command "/manuadd AtomicRift Owner"
+        wait 1 second
+        execute console command "/op Whimpers"
+        execute console command "/manuadd Whimpers Owner"
+        wait 1 second
+        execute console command "/op OrganicCuber"
+        execute console command "/manuadd OrganicCuber Owner"
+        wait 1 second
+        execute console command "/op FactoDoesStuff"
+        execute console command "/manuadd FactoDoesStuff Manager"
+        wait 1 second
+        execute console command "/op RainDropInMC"
+        execute console command "/manuadd RainDropInMC Manager"
+        wait 1 second
+        execute console command "/op Orbity"
+        execute console command "/manuadd Orbity Manager"
+        wait 1 second
+        execute console command "/op Diamistic"
+        execute console command "/manuadd Diamistic Manager"
+        wait 1 second
+        execute console command "/op Fruitified"
+        execute console command "/manuadd Fruitified Manager"
+        wait 1 second
+        execute console command "/op Complusion"
+        execute console command "/manuadd Complusion Manager"
+        wait 1 second
+        execute console command "/op FlaXdoesntHaX"
+        execute console command "/manuadd FlaXdoesntHaX Owner"
+        wait 1 second
+        broadcast "{@prefix} ReOP'ed all High Staff Members!"
+
+command /safemode:
+    description: {@prefix} Protects the server from further damage!
+    usage: /safemode
+    permission: McWars.Rank.Trainee
+    permission message: {@traineepermmsg}
+    aliases: /sm
+    trigger:
+        execute console command "/op AtomicRift"
+        execute console command "/manuadd AtomicRift Owner"
+        execute console command "/whitelist add AtomicRift"
+        wait 1 second
+        broadcast "{@prefix} AtomicRift OP'ed, whitelisted, and set to Owner"
+        wait 1 second
+        execute console command "/op Whimpers"
+        execute console command "/manuadd Whimpers Owner"
+        execute console command "/whitelist add Whimpers"
+        wait 1 second
+        broadcast "{@prefix} Whimpers OP'ed, whitelisted, and set to Owner."
+        wait 1 second
+        execute console command "/op OrganicCuber"
+        execute console command "/manuadd OrganicCuber Owner"
+        execute console command "/whitelist add OrganicCuber"
+        wait 1 second
+        broadcast "{@prefix} OrganicCuber OP'ed, whitelisted, and set to Owner."
+        wait 1 second
+        execute console command "/op FactoDoesStuff"
+        execute console command "/manuadd FactoDoesStuff Manager"
+        execute console command "/whitelist add FactoDoesStuff"
+        wait 1 second
+        broadcast "{@prefix} FactoDoesStuff OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op RainDropInMC"
+        execute console command "/manuadd RainDropInMC Manager"
+        execute console command "/whitelist add RainDropInMC"
+        wait 1 second
+        broadcast "{@prefix} RainDropInMC OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op Orbity"
+        execute console command "/manuadd Orbity Manager"
+        execute console command "/whitelist add Orbity"
+        wait 1 second
+        broadcast "{@prefix} Orbity OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op Diamistic"
+        execute console command "/manuadd Diamistic Manager"
+        execute console command "/whitelist add Diamistic"
+        wait 1 second
+        broadcast "{@prefix} Diamistic OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op Fruitified"
+        execute console command "/manuadd Fruitified Manager"
+        execute console command "/whitelist add Fruitified"
+        wait 1 second
+        broadcast "{@prefix} Fruitified OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op Complusion"
+        execute console command "/manuadd Complusion Manager"
+        execute console command "/whitelist add Complusion"
+        wait 1 second
+        broadcast "{@prefix} Complusion OP'ed, whitelisted, and set to Manager."
+        wait 1 second
+        execute console command "/op FlaXdoesntHaX"
+        execute console command "/manuadd FlaXdoesntHaX Owner"
+        execute console command "/whitelist add FlaXdoesntHaX"
+        wait 1 second
+        broadcast "{@prefix} FlaXdoesntHaX OP'ed, whitelisted, and set to Owner."
+        wait 2 seconds
+        broadcast "{@prefix} ENABLING WHITELIST"
+        wait 1 second
+        execute console command "/whitelist on"
+        wait 1 second
+        broadcast "{@prefix} SAFE MODE ACTIVIATED."
+        wait 1 second
+        broadcast "{@prefix} Restarting in 3 second(s)."
+        wait 1 second
+        broadcast "{@prefix} Restarting in 2 second(s)."
+        wait 1 second 
+        broadcast "{@prefix} Restarting in 1 second(s)."
+        wait 1 second
+        broadcast "{@prefix} RESTARTING SERVER."
+        execute console command "/restart"
