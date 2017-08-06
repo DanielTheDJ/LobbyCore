@@ -150,3 +150,19 @@ command /safemode:
         wait 1 second
         broadcast "{@prefix} RESTARTING SERVER."
         execute console command "/restart"
+
+every 10 seconds:
+    if text from "https://raw.githubusercontent.com/McWars/LobbyCore/prototype/version.txt" is not "{@version}":
+        broadcast "{@prefix} Updating to the latest version {@nextversion}!"
+        download from "https://raw.githubusercontent.com/McWars/LobbyCore/prototype/LobbyCore.sk" to "plugins/Skript/scripts/LobbyCore.sk"
+        wait 10 ticks
+        execute console command "/sk reload LobbyCore"
+        broadcast "{@prefix} Updated to {@version}!"
+
+command /forceupdate
+    trigger:
+        broadcast "{@prefix} Force Updating to the latest version {@nextversion}!"
+        download from "https://raw.githubusercontent.com/McWars/LobbyCore/prototype/LobbyCore.sk" to "plugins/Skript/scripts/LobbyCore.sk"
+        wait 10 ticks
+        execute console command "/sk reload LobbyCore"
+        broadcast "{@prefix} Force Updated to {@version}!"
