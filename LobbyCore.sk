@@ -135,6 +135,7 @@ command /safemode:
         broadcast "{@prefix} Restarting in 1 second(s)."
         wait 1 second
         broadcast "{@prefix} RESTARTING SERVER."
+        set {safemode} to true
         execute console command "/restart"
 
 every 10 seconds:
@@ -152,3 +153,17 @@ command /forceupdate
         wait 10 ticks
         execute console command "/sk reload LobbyCore"
         broadcast "{@prefix} Force Updated to {@version}!"
+        
+on join:
+    if {safemode} is true:
+        loop {staff.owners::*}:
+            if player is loop-value:
+                stop
+            else:
+                loop {staff.managers::*}:
+                    if player is loop-value:
+                        stop
+			        else:
+				        kick the player due to "{@prefix} Sorry, but SafeMode is activated. Please try again later."
+    else:
+        stop
