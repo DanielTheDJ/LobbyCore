@@ -3,8 +3,8 @@
 
 options:
     prefix: &6&lLobby>&4&l
-    version: 1.0.0
-    nextversion: 1.0.1
+    version: 1.0
+    nextversion: 1.1
     defaultpermmsg: {@prefix} You must have the permission DEFAULT to use this command!
     jrmodpermmsg: {@prefix} You must have the permission JUNIOR MODERATOR to use this command!
     modpermmsg: {@prefix} You must have the permission MODERATOR to use this command!
