@@ -97,7 +97,7 @@ command /safemode:
         if argument 2 is "disable":
             set {safemode} to false
             execute console command "whitelist off"
-            broadcast "{@prefix} SafeMode disabled, Whitelist is not off."
+            broadcast "{@prefix} SafeMode disabled, Whitelist is now off."
             broadcast "{@prefix} Just in case, we are going to save all, then restart the server."
             broadcast "{@prefix} Thank you for your patience. Starting progress in 5 seconds."
             wait 5 seconds
