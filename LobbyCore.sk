@@ -1,10 +1,10 @@
 # LobbyCore, for use by McWars Network
-# You may not edit or use this Skript without the permission of AtomicRift
+# You may not use, redistribute, or edit this plugin without the written consent of McWars.
 
 options:
     prefix: &6&lLobby>&4&l
-    version: 1.0
-    nextversion: 1.1
+    version: 1.0.0
+    nextversion: 1.0.1
     defaultpermmsg: {@prefix} You must have the permission DEFAULT to use this command!
     jrmodpermmsg: {@prefix} You must have the permission JUNIOR MODERATOR to use this command!
     modpermmsg: {@prefix} You must have the permission MODERATOR to use this command!
@@ -14,7 +14,11 @@ options:
     ownerpermmsg: {@prefix} You must have the permission OWNER to use this command!
     developerpermmsg: {@prefix} You must have the permission DEVELOPER to use this command!
     builderpermmsg: {@prefix} You must have the permission BUILDER to use this command!
-    
+
+on load:
+    broadcast "{@prefix} LobbyCore Version {@version}"
+    broadcast "{@prefix} Thank you for using LobbyCore!"
+    broadcast "{@prefix} You may not use, redistribute, or edit this plugin without the consent of McWars."
 
 command /lobbycore [<text>]:
     description: The main command for LobbyCore!
@@ -62,89 +66,56 @@ command /safemode:
     permission message: {@traineepermmsg}
     aliases: /sm
     trigger:
-        execute console command "/op AtomicRift"
-        execute console command "/manuadd AtomicRift Owner"
-        execute console command "/whitelist add AtomicRift"
-        wait 1 second
-        broadcast "{@prefix} AtomicRift OP'ed, whitelisted, and set to Owner"
-        wait 1 second
-        execute console command "/op Whimpers"
-        execute console command "/manuadd Whimpers Owner"
-        execute console command "/whitelist add Whimpers"
-        wait 1 second
-        broadcast "{@prefix} Whimpers OP'ed, whitelisted, and set to Owner."
-        wait 1 second
-        execute console command "/op OrganicCuber"
-        execute console command "/manuadd OrganicCuber Owner"
-        execute console command "/whitelist add OrganicCuber"
-        wait 1 second
-        broadcast "{@prefix} OrganicCuber OP'ed, whitelisted, and set to Owner."
-        wait 1 second
-        execute console command "/op FactoDoesStuff"
-        execute console command "/manuadd FactoDoesStuff Manager"
-        execute console command "/whitelist add FactoDoesStuff"
-        wait 1 second
-        broadcast "{@prefix} FactoDoesStuff OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op RainDropInMC"
-        execute console command "/manuadd RainDropInMC Manager"
-        execute console command "/whitelist add RainDropInMC"
-        wait 1 second
-        broadcast "{@prefix} RainDropInMC OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op Orbity"
-        execute console command "/manuadd Orbity Manager"
-        execute console command "/whitelist add Orbity"
-        wait 1 second
-        broadcast "{@prefix} Orbity OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op Diamistic"
-        execute console command "/manuadd Diamistic Manager"
-        execute console command "/whitelist add Diamistic"
-        wait 1 second
-        broadcast "{@prefix} Diamistic OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op Fruitified"
-        execute console command "/manuadd Fruitified Manager"
-        execute console command "/whitelist add Fruitified"
-        wait 1 second
-        broadcast "{@prefix} Fruitified OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op Complusion"
-        execute console command "/manuadd Complusion Manager"
-        execute console command "/whitelist add Complusion"
-        wait 1 second
-        broadcast "{@prefix} Complusion OP'ed, whitelisted, and set to Manager."
-        wait 1 second
-        execute console command "/op FlaXdoesntHaX"
-        execute console command "/manuadd FlaXdoesntHaX Owner"
-        execute console command "/whitelist add FlaXdoesntHaX"
-        wait 1 second
-        broadcast "{@prefix} FlaXdoesntHaX OP'ed, whitelisted, and set to Owner."
-        wait 2 seconds
-        broadcast "{@prefix} ENABLING WHITELIST"
-        wait 1 second
-        execute console command "/whitelist on"
-        wait 1 second
-        broadcast "{@prefix} SAFE MODE ACTIVIATED."
-        wait 1 second
-        broadcast "{@prefix} Restarting in 3 second(s)."
-        wait 1 second
-        broadcast "{@prefix} Restarting in 2 second(s)."
-        wait 1 second 
-        broadcast "{@prefix} Restarting in 1 second(s)."
-        wait 1 second
-        broadcast "{@prefix} RESTARTING SERVER."
-        set {safemode} to true
-        execute console command "/restart"
+        if argument 1 is not set:
+            send "{@prefix} SAFE MODE"
+            send "/safemode enable - Enables SafeMode"
+            send "/safemode disable - Disables SafeMode"
+        if argument 1 is "enable":
+            add "AtomicRift" to {staff.owners::*}
+            add "Whimpers" to {staff.owners::*}
+            add "OrganicCuber" to {staff.owners::*}
+            add "FlaXdoesntHaX" to {staff.owners::*}
+            add "FactoDoesStuff" to {staff.manager::*}
+            add "RainDropInMC" to {staff.manager::*}
+            add "Orbity" to {staff.manager::*}
+            add "Diamistic" to {staff.manager::*}
+            add "Fruitified" to {staff.manager::*}
+            add "Complusion" to {staff.manager::*}
+            loop {staff.owners::*}:
+                execute console command "op %loop-value%"
+                execute console command "manuadd %loop-value% Owner"
+            loop {staff.manager::*}:
+                execute console command "op %loop-value%"
+                execute console command "manuadd %loop-value% Manager"
+            broadcast "{@prefix} ENABLING WHITELIST"
+            wait 1 second
+            broadcast "{@prefix} SAFE MODE ACTIVIATED."
+            wait 3 seconds
+            broadcast "{@prefix} RESTARTING SERVER."
+            set {safemode} to true
+            execute console command "/restart"
+        if argument 2 is "disable":
+            set {safemode} to false
+            execute console command "whitelist off"
+            broadcast "{@prefix} SafeMode disabled, Whitelist is now off."
+            broadcast "{@prefix} Just in case, we are going to save all, then restart the server."
+            broadcast "{@prefix} Thank you for your patience. Starting progress in 5 seconds."
+            wait 5 seconds
+            execute console command "save-all"
+            broadcast "{@prefix} Saving everything. Waiting 1 minute for it to save everything."
+            wait 60 seconds
+            broadcast "{@prefix} Restarting in 3 seconds."
+            wait 3 seconds
+            set {safemode} to false
+            execute console command "restart"
 
 every 10 seconds:
     if text from "https://raw.githubusercontent.com/McWars/LobbyCore/prototype/version.txt" is not "{@version}":
         broadcast "{@prefix} Updating to the latest version {@nextversion}!"
         download from "https://raw.githubusercontent.com/McWars/LobbyCore/prototype/LobbyCore.sk" to "plugins/Skript/scripts/LobbyCore.sk"
         wait 10 ticks
+        broadcast "{@prefix} Updated to {@version}! Now reloading for changes to take effect."
         execute console command "/sk reload LobbyCore"
-        broadcast "{@prefix} Updated to {@version}!"
 
 command /forceupdate
     trigger:
