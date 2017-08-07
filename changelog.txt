@@ -1,0 +1,11 @@
+LobbyBot Changelog
+
+Version 1.0.0 (8-7-17 - ?) -
+
+- Rank Permission Messages added (Options). (RainDropInMC)
+- Added "removeperms" function. (RainDropInMC)
+- Added and Simplified "/reop". (RainDropInMC & HyperFlame)
+- Added on skript load message. (RainDropInMC)
+- Simplified and added arguments to "/safemode". (RainDropInMC & HyperFlame)
+- Added copyright message to a Skript comment and on skript load message. (RainDropInMC)
+- Added changelog argument to the main command "/lobbycore" (RainDropInMC)
